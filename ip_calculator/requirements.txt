@@ -1,0 +1,3 @@
+# Requisitos para la calculadora de IP en Flask
+
+Flask>=2.3.3

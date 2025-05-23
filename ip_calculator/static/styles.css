@@ -1,0 +1,167 @@
+/* === FUENTES BROCKMANN === */
+.bk-black { font-family: 'Brockmann', sans-serif; font-weight: 900; }
+.bk-bold { font-family: 'Brockmann', sans-serif; font-weight: 700; }
+.bk-medium { font-family: 'Brockmann', sans-serif; font-weight: 500; }
+.bk-regular { font-family: 'Brockmann', sans-serif; font-weight: 400; }
+
+/* === GENERALES === */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: #fefdfb;
+  color: #000;
+}
+
+/* === INTRO === */
+#intro {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: block;
+  z-index: 0;
+}
+
+#arrow {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3em;
+  color: #fff;
+  z-index: 10;
+  cursor: pointer;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+/* === FORMULARIO === */
+#formulario {
+  padding: 6em 2em;
+  text-align: center;
+  z-index: 2;
+}
+
+h1.big-title {
+  font-size: 6em;
+  margin: 0;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 2em;
+  margin-bottom: 2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+}
+
+label, input, button {
+  font-size: 1em;
+  font-family: 'Brockmann', sans-serif;
+}
+
+input, button {
+  padding: 0.7em 1.2em;
+  border: 1px solid #000;
+  width: 300px;
+  text-align: center;
+  background: transparent;
+}
+
+button:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* === ERRORES === */
+.error {
+  color: red;
+  font-size: 1.4em;
+  background: #ffe6e6;
+  border: 2px solid red;
+  padding: 1em;
+  margin: 2em auto;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+/* === RESULTADOS === */
+#resultado {
+  padding: 6em 2em;
+  text-align: center;
+  background: #fefdfb;
+}
+
+.contenedor {
+  max-width: 960px;
+  margin: auto;
+}
+
+#resultado h1.big-title {
+  font-size: 5em;
+  margin-bottom: 1em;
+}
+
+.resultado-item {
+  font-size: 1.6em;
+  margin: 0.6em 0;
+  font-weight: 500;
+}
+
+/* === BINARIO VISUAL === */
+.binario-box {
+  background: #f0f0e8;
+  padding: 1em;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  margin-top: 1em;
+}
+
+span.bit {
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 1.2em;
+  margin: 0 0.05em;
+  display: inline-block;
+}
+
+.red { background: #c0392b; color: #fff; }
+.subred { background: #8e44ad; color: #fff; }
+.host { background: #b8e986; color: #000; }
+
+.binario-leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  font-size: 0.9em;
+  margin-top: 1em;
+}
+
+.binario-leyenda span {
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+}
+

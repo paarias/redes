@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de IP</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    @font-face {
+      font-family: 'Brockmann';
+      src: url('/static/Brockmann/Brockmann-Regular.ttf') format('truetype');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'Brockmann';
+      src: url('/static/Brockmann/Brockmann-Medium.ttf') format('truetype');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'Brockmann';
+      src: url('/static/Brockmann/Brockmann-Bold.ttf') format('truetype');
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: 'Brockmann';
+      src: url('/static/Brockmann/Brockmann-Black.ttf') format('truetype');
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Intro visual animada -->
+<section id="intro">
+  <div id="arrow" onclick="document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });">🡣</div>
+</section>
+
+<!-- Formulario con fondo de ruido -->
+<section id="formulario" class="formulario-bg">
+  <h1 class="bk-black big-title" style="font-size: 8em;">CALCULADORA</h1>
+  <h2 class="bk-medium subtitle">de IP</h2>
+
+  <form method="post">
+    <label for="ip" class="bk-medium">Dirección IP:</label>
+    <input type="text" id="ip" name="ip" placeholder="192.168.0.1" required
+           value="{{ request.form['ip'] if request.method == 'POST' else '' }}">
+
+    <label for="mask" class="bk-medium">Máscara (CIDR):</label>
+    <input type="number" id="mask" name="mask" placeholder="24" min="1" max="30" required
+           value="{{ request.form['mask'] if request.method == 'POST' else '' }}">
+
+    <button type="submit" class="bk-bold" id="btn-calcular">Calcular</button>
+  </form>
+
+  {% if data and data.error %}
+    <p class="error bk-medium">{{ data.error }}</p>
+  {% endif %}
+</section>
+
+<!-- Resultados con fondo de ruido -->
+{% if data and not data.error %}
+<section id="resultado" class="resultado-bg">
+  <div class="contenedor">
+    <h1 class="bk-black big-title">RESULTADO</h1>
+    <div class="datos-resultado">
+      <p class="bk-bold resultado-item"><strong>IP de red:</strong> {{ data.network }}</p>
+      <p class="bk-bold resultado-item"><strong>Broadcast:</strong> {{ data.broadcast }}</p>
+      <p class="bk-bold resultado-item"><strong>Hosts útiles:</strong> {{ data.num_hosts }}</p>
+      <p class="bk-bold resultado-item"><strong>Rango de hosts:</strong> {{ data.host_range }}</p>
+      <p class="bk-bold resultado-item"><strong>Clase:</strong> {{ data.ip_class }}</p>
+      <p class="bk-bold resultado-item"><strong>Tipo:</strong> {{ data.is_private }}</p>
+      <p class="bk-bold resultado-item"><strong>Binario:</strong> {{ data.binary_parts|safe }}</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script src="/static/sketch.js"></script>
+
+<script>
+  // Redirigir automáticamente al resultado si existe
+  window.addEventListener("DOMContentLoaded", function () {
+    const contenedorResultado = document.querySelector('#resultado .contenedor');
+    if (contenedorResultado) {
+      document.getElementById("resultado").scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+

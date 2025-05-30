@@ -3,22 +3,28 @@ import ipaddress
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/bio')
+def bio():
+    return render_template('bio.html')
+
+@app.route('/calculadora', methods=['GET', 'POST'])
+def calculadora():
     data = {}
     if request.method == 'POST':
         ip_input = request.form['ip']
         mask_input = request.form['mask']
 
         try:
-            # Validación de máscara
             if not mask_input.isdigit():
                 raise ValueError("La máscara debe ser un número entero.")
             mask_input = int(mask_input)
             if mask_input < 1 or mask_input > 30:
                 raise ValueError("La máscara debe estar entre 1 y 30.")
 
-            # Validación de formato IP
             octetos = ip_input.split('.')
             if len(octetos) != 4:
                 raise ValueError("La dirección IP debe tener 4 octetos.")
@@ -33,24 +39,20 @@ def index():
             interface = ipaddress.IPv4Interface(f"{ip}/{mask_input}")
             network = interface.network
 
-            # Rechazar clases D y E
             ip_class = get_ip_class(ip_input)
             if ip_class.startswith("Clase D") or ip_class.startswith("Clase E"):
                 raise ValueError(f"Dirección de {ip_class} no es válida para redes comunes.")
 
-            # Calcular datos
             data['network'] = str(network.network_address)
             data['broadcast'] = str(network.broadcast_address)
             total_hosts = network.num_addresses - 2 if network.num_addresses > 2 else 0
             data['num_hosts'] = total_hosts
 
-            # Verificar si la IP es red o broadcast
             if ip == network.network_address:
                 raise ValueError("La IP ingresada corresponde a la dirección de red.")
             elif ip == network.broadcast_address:
                 raise ValueError("La IP ingresada corresponde a la dirección de broadcast.")
 
-            # Confirmar que la IP esté dentro del rango útil
             if total_hosts >= 1:
                 hosts = list(network.hosts())
                 if ip not in hosts:
@@ -66,7 +68,7 @@ def index():
         except Exception as e:
             data['error'] = f"❌ Error: {e}"
 
-    return render_template('index.html', data=data)
+    return render_template('calculadora.html', data=data)
 
 def get_ip_class(ip):
     first_octet = int(ip.split('.')[0])
@@ -91,13 +93,10 @@ def get_binary_visual(ip, mask):
             html_bin += f"<span class='bit red'>{bit}</span>"
         else:
             html_bin += f"<span class='bit host'>{bit}</span>"
-
-        # Separar por puntos binarios
         if i % 8 == 7 and i != 31:
             html_bin += "<span class='bit'>.</span>"
 
     html_bin += '</div>'
-
     html_bin += """
     <div class="binario-leyenda">
         <span class="red">red</span>
@@ -108,7 +107,5 @@ def get_binary_visual(ip, mask):
 
     return html_bin
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-

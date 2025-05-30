@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ARIAS - Bio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Alumni+Sans+Pinstripe&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+
+    .titulo {
+      font-family: 'Alumni Sans Pinstripe', sans-serif;
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: 8px;
+      color: #3ebd33;
+      text-decoration: none;
+    }
+
+    .info-link {
+      font-size: 1rem;
+      text-decoration: none;
+      color: #000;
+      border-bottom: 1px dotted #000;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    main {
+      display: flex;
+      gap: 3rem;
+      max-width: 1000px;
+      width: 100%;
+      flex-direction: row;
+    }
+
+    .bio-text {
+      flex: 1;
+      max-width: 800px;
+    }
+
+    .bio-text h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .bio-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    .bio-img {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .bio-img img:nth-child(2) {
+  margin-top: 4rem; /* Solo entre retrato y primera obra */
+}
+
+
+    .bio-img img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .bio-img {
+        flex: 0.8;
+        max-width: 250px; /* antes era 400px */
+        align-self: flex-start;
+}
+
+    }
+
+    .cv-section {
+      width: 100%;
+      max-width: 800px;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cv-row {
+      display: flex;
+      border-top: 1px solid #ccc;
+      padding: 1.5rem 0;
+      gap: 2rem;
+    }
+
+    .cv-label {
+      flex: 0.4;
+      font-weight: 600;
+      color: #444;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .cv-content {
+      flex: 1;
+    }
+
+    .cv-content p {
+      margin: 0 0 1.2rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .cv-anno {
+      float: right;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #666;
+    }
+    .galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.galeria img {
+  width: 250px;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="titulo" href="{{ url_for('index') }}">ARIAS</a>
+    <a class="info-link" href="https://docs.google.com/presentation/d/1edD_0wPPfqyafj_smNUDcdnhepIkEwzF/edit?usp=sharing&ouid=107008672398950330928&rtpof=true&sd=true" target="_blank">CV →</a>
+   
+  </header>
+  
+</section>
+
+  <main>
+    <div class="bio-img">
+    <img src="{{ url_for('static', filename='bio_img.jpg') }}" alt="Retrato">
+    <img src="{{ url_for('static', filename='obra1.png') }}" alt="Obra 1">
+    <img src="{{ url_for('static', filename='obra2.png') }}" alt="Obra 2">
+    <img src="{{ url_for('static', filename='obra3.png') }}" alt="Obra 3">
+    <img src="{{ url_for('static', filename='obra4.png') }}" alt="Obra 4">
+    </div>
+
+    <div class="bio-text">
+      <h2>Statement</h2>
+      <p>
+        Siempre me afectó más de lo que podía explicar. Ver lo que pasaba, lo que no encajaba, lo injusto. Por mucho tiempo intenté señalarlo todo, entenderlo todo. Esa sobreempatía me desbordaba, y a veces me dolía más de lo necesario.
+      </p>
+      <p>
+        Con el tiempo, dejé de ver sólo a las personas y empecé a notar otras formas de vida. Ahí encontré una pausa: no una respuesta, pero sí una forma distinta de estar, de mirar sin exigir tanto. La tecnología se volvió una aliada. Me ofreció estructura, lógica, una manera de ordenar el dolor. Me ayudó a ver que muchas veces no se trata de maldad, sino de contextos que no comprendemos.
+      </p>
+      <p>
+        Descubrí que los datos, los sistemas y otras formas de representación pueden ser lenguajes de empatía. Desde ahí, mi práctica —personal y artística— busca traducir el caos sin perder la ternura.
+      </p>
+
+      <section class="cv-section">
+        <div class="cv-row">
+          <div class="cv-label">EDUCACIÓN</div>
+          <div class="cv-content">
+            <p><strong>Ingeniería en sistemas y computación</strong><br>Universidad El Bosque, Bogotá. <span class="cv-anno">en curso</span></p>
+            <p><strong>Semillero de investigación - creación 3D CreaFab</strong><br>Aprendizaje modelado 3D y uso de <em>Pytorch3D</em> en proyectos colaborativos <span class="cv-anno">en curso</span></p>
+            <p><strong>Líder semillero de investigación-creación Revoluciones estéticas</strong><br>Creación dispositivo sonoro integrado con electrónica <span class="cv-anno">en curso</span></p>
+          </div>
+        </div>
+
+        <div class="cv-row">
+          <div class="cv-label">SUBVENCIONES, INVITACIONES, RESIDENCIAS.</div>
+          <div class="cv-content">
+            <p><strong>Beca de creación paisajes bio computacionales</strong><br>Laboratorio de creación de paisajes con un enfoque transdisciplinario <span class="cv-anno">2025</span></p>
+            <p><strong>Invitación Cultural Joyería Cyborg</strong><br>Laboratorio experimental que explora la joyería artística como artefacto de poder <span class="cv-anno">2025</span></p>
+            <p><strong>Hub de Innovación, plataforma</strong><br>Hub Territorios digitales y narrativas expandidas <span class="cv-anno">2025</span></p>
+            <p><strong>Programa ARTBO Tutor</strong><br>Programa de formación para artistas no representados <span class="cv-anno">2023</span></p>
+          </div>
+        </div>
+
+        <div class="cv-row">
+          <div class="cv-label">EXHIBICIONES GRUPALES</div>
+          <div class="cv-content">
+            <p><strong>Muestra de resultados joyería cyborg</strong><br>Plataforma, IDARTES arte ciencia y tecnología <span class="cv-anno">2025</span></p>
+            <p><strong>Artificio 2023</strong><br>Fundación Gilberto Alzate Avendaño. Bogotá, Colombia <span class="cv-anno">2023</span></p>
+            <p><strong>Poéticas Artificiales: poéticas para imaginar un mundo</strong><br>ARTBO salas programa ARTBO | Tutor. <span class="cv-anno">2023</span></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
